@@ -11,15 +11,17 @@ namespace ads_exp{
             int capacity;
             T* array;
         
+        public:
+            class iterator;
 
         public:
-            vector(int _length = 1, T initial_value = nullptr){
-                array = (T*)calloc(_length, sizeof(T));
-                length = _length;
-                capacity = _length;
-                if(initial_value){
-                    for(int i = 0; i < length; i++) array[i] = initial_value;
-                }
+            vector(int _length = 1, T initial_value = 0): length(_length), capacity(_length), array(nullptr){
+                array = new T[_length];
+                for(int i = 0; i < length; i++) array[i] = initial_value;
+            }
+
+            ~vector(){
+                delete [] array;
             }
 
             void push_back(T new_element){
